@@ -7,6 +7,13 @@ class Video {
     public $published = false;
     public $title;
 
+    public function __construct(string $type, float $duration, string $title)
+    {
+        $this->type = $type;
+        $this->duration = $duration;
+        $this->title = $title;
+    }
+
     public function play ()
     {
         return $this->published ? "The vido is playing": "This video is not yet available";
@@ -19,14 +26,9 @@ class Video {
 
 }
 
-header('Content-Type:text/plain', true);
+// header('Content-Type:text/plain', true);
 
-$introduction = new Video();
-$introduction->published = true;
-// Deprecated dynamic property.
-$introduction->author = 'Terry 0';
-echo $introduction->play(), PHP_EOL, $introduction->pause(), PHP_EOL, $introduction->author, PHP_EOL;
-
-// $introduction->play() Return a different result than this instance output.
-$video2 = new Video();
-echo $video2->play(), PHP_EOL, $video2->pause(), PHP_EOL;
+// Fatal error: Uncaught ArgumentCountError: Too few arguments to fuction video
+// $introduction = new Video();
+$introduction = new Video('mp4', 10.5, 'sample');
+var_dump($introduction);
