@@ -1,53 +1,56 @@
 <?php
 
-class Video {
+class Animal{
+    public $weight;
 
-    public $type;
-    public $duration;
-    public $published = false;
-    private $title;
-    private $playStatus;
-
-    public function setPublished(bool $state)
+    public function eat()
     {
-        $this->published = $state;
+        var_dump('All animals can ead');
     }
 
-    private function getPublished()
+    public function reproduce()
     {
-        return $this->published;
+        var_dump('All animals can reproduce');
     }
-    
-    public function setTitle(String $title)
-    {
-        $this->title = $title;
-    }
-
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    public function play ()
-    {
-        if ($this->getPublished()) {
-            $this->playStatus = true;
-            return "The video is playing";
-        }
-        return "The video is not ye available";
-    }
-
-    public function pause ()
-    {
-        return $this->playStatus ? 'The video is paused': "";
-    }
-
 }
 
-header('Content-Type:text/plain', true);
-$introduction = new Video;
-$introduction->setPublished(true);
+class Mammal extends Animal {
+    public $heartRate;
 
-$introduction->setTitle('Introduction to OOP');
-echo $introduction->getTitle(), PHP_EOL;
-echo $introduction->play(), PHP_EOL, $introduction->pause(), PHP_EOL;
+    public function breathe()
+    {
+        var_dump('I can breathe because I am a Mammal');
+    }
+}
+
+class Dog extends Mammal {
+    public $color;
+
+    public function bark()
+    {
+        var_dump('I can bark because I am a '. strtolower(get_class()));
+    }
+
+    public function breathe()
+    {
+        var_dump('I breathe very fast');
+    }
+
+    public function chase()
+    {
+        var_dump('I am chasing a Rabbit');
+    }
+}
+
+header('Content-Type:text/palin', true);
+$brown = new Dog;
+$brown->weight = '7.3';
+$brown->color = 'Brown';
+$brown->heartRate = 'okay';
+
+echo "Weight " . $brown->weight, PHP_EOL, "Color " . $brown->color, PHP_EOL, "Heart rate " . $brown->heartRate;
+$brown->bark();
+$brown->chase();
+$brown->eat();
+$brown->reproduce();
+$brown->breathe();
