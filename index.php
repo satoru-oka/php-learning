@@ -1,34 +1,28 @@
 <?php
 
-class Database{
+class Database {
     static private $pdo;
     static public $operators = ['=', '<>', 'and', 'or', 'like'];
     private $table;
 
     public static function connect(string $method)
     {
-        $obj = new static;
-        $obj->table;
-        self::$pdo = $method;
+        static::$pdo = $method;
+        return new static;
     }
 
-    public static function create(array $data)
+    public function table(string $name)
     {
-        var_dump('Creating a new database with '. self::$pdo);
+        $this->table = $name;
+        return $this;
     }
 
-    public function getMethod()
+    public function insert(array $data)
     {
-        return self::$pdo;
+        var_dump('Connected to the database using ' . self::$pdo);
+        var_dump("INSERTING INTO {$this->table} VALUES(". json_encode($data).")");
     }
 }
 
 header('Content-Type:text/plain', true);
-var_dump(Database::$operators);
-Database::connect('pdo');
-Database::create([]);
-// fatal error: uncaught error: non static.
-// Database::getMethod();
-
-$db = new Database;
-echo PHP_EOL, $db->getMethod();
+Database::connect('pdo')->table('users')->insert(['username' => 'Terry', 'password' => 'secret']);
