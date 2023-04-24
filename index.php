@@ -1,61 +1,34 @@
 <?php
 
-class Animal{
-    public $weight;
+class Database{
+    static private $pdo;
+    static public $operators = ['=', '<>', 'and', 'or', 'like'];
+    private $table;
 
-    public function eat()
+    public static function connect(string $method)
     {
-        var_dump('All animals can ead');
+        $obj = new static;
+        $obj->table;
+        self::$pdo = $method;
     }
 
-    public function reproduce()
+    public static function create(array $data)
     {
-        var_dump('All animals can reproduce');
-    }
-}
-
-class Mammal extends Animal {
-    public $heartRate;
-
-    public function breathe()
-    {
-        var_dump('I can breathe because I am a Mammal');
-    }
-}
-
-class Dog extends Mammal {
-    public $color;
-
-    public function bark()
-    {
-        var_dump('I can bark because I am a '. strtolower(get_class()));
+        var_dump('Creating a new database with '. self::$pdo);
     }
 
-    public function breathe()
+    public function getMethod()
     {
-        var_dump('I breathe very fast');
-    }
-
-    public function chase()
-    {
-        var_dump('I am chasing a Rabbit');
+        return self::$pdo;
     }
 }
 
-header('Content-Type:text/palin', true);
-$brown = new Dog;
-$brown->weight = '7.3';
-$brown->color = 'Brown';
-$brown->heartRate = 'okay';
+header('Content-Type:text/plain', true);
+var_dump(Database::$operators);
+Database::connect('pdo');
+Database::create([]);
+// fatal error: uncaught error: non static.
+// Database::getMethod();
 
-echo "Weight " . $brown->weight, PHP_EOL, "Color " . $brown->color, PHP_EOL, "Heart rate " . $brown->heartRate;
-// Calling methods of the dog class
-$brown->bark();
-// dog class
-$brown->chase();
-// animal class
-$brown->eat();
-// animal class
-$brown->reproduce();
-// mammal class
-$brown->breathe();
+$db = new Database;
+echo PHP_EOL, $db->getMethod();
