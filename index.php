@@ -1,28 +1,15 @@
 <?php
 
-class Database {
-    static private $pdo;
-    static public $operators = ['=', '<>', 'and', 'or', 'like'];
-    private $table;
-
-    public static function connect(string $method)
-    {
-        static::$pdo = $method;
-        return new static;
-    }
-
-    public function table(string $name)
-    {
-        $this->table = $name;
-        return $this;
-    }
-
-    public function insert(array $data)
-    {
-        var_dump('Connected to the database using ' . self::$pdo);
-        var_dump("INSERTING INTO {$this->table} VALUES(". json_encode($data).")");
-    }
-}
+spl_autoload_register(function($className) {
+    include 'src/' .$className . '.php';
+});
 
 header('Content-Type:text/plain', true);
-Database::connect('pdo')->table('users')->insert(['username' => 'Terry', 'password' => 'secret']);
+$pdo = (new PDOClient('mysql', 'localhost', 'store', 'store', 'secret'))->connect();
+$mysqli = (new MySQLiClient('localhost', 'store', 'store', 'secret'))->connect();
+
+$products = $mysqli->select("SELECT * FROM products")->get();
+
+foreach ($products as $product) {
+    var_dump($product->name);
+}
