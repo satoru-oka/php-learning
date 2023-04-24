@@ -49,8 +49,13 @@ $brown->color = 'Brown';
 $brown->heartRate = 'okay';
 
 echo "Weight " . $brown->weight, PHP_EOL, "Color " . $brown->color, PHP_EOL, "Heart rate " . $brown->heartRate;
+// Calling methods of the dog class
 $brown->bark();
+// dog class
 $brown->chase();
+// animal class
 $brown->eat();
+// animal class
 $brown->reproduce();
+// mammal class
 $brown->breathe();
