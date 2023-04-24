@@ -5,30 +5,49 @@ class Video {
     public $type;
     public $duration;
     public $published = false;
-    public $title;
+    private $title;
+    private $playStatus;
 
-    public function __construct(string $type, float $duration, string $title)
+    public function setPublished(bool $state)
     {
-        $this->type = $type;
-        $this->duration = $duration;
+        $this->published = $state;
+    }
+
+    private function getPublished()
+    {
+        return $this->published;
+    }
+    
+    public function setTitle(String $title)
+    {
         $this->title = $title;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     public function play ()
     {
-        return $this->published ? "The vido is playing": "This video is not yet available";
+        if ($this->getPublished()) {
+            $this->playStatus = true;
+            return "The video is playing";
+        }
+        return "The video is not ye available";
     }
 
     public function pause ()
     {
-        return $this->published ? 'The video is paused': "";
+        return $this->playStatus ? 'The video is paused': "";
     }
 
 }
 
-// header('Content-Type:text/plain', true);
+header('Content-Type:text/plain', true);
+$introduction = new Video;
+$introduction->setPublished(true);
 
-// Fatal error: Uncaught ArgumentCountError: Too few arguments to fuction video
-// $introduction = new Video();
-$introduction = new Video('mp4', 10.5, 'sample');
-var_dump($introduction);
+$introduction->setTitle('Introduction to OOP');
+echo $introduction->getTitle(), PHP_EOL;
+echo $introduction->play(), PHP_EOL, $introduction->pause(), PHP_EOL;
