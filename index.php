@@ -1,11 +1,7 @@
 <?php
-use App\Student;
-use App\Record;
-use Acme\Test;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once 'parseform.php';
 
-header('Content-Type:text/plain', true);
+require_once 'form.php';
 
 
-new Student(new Record(), new Test());
