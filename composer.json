@@ -1,0 +1,23 @@
+{
+    "name": "satoru/php-learning",
+    "description": "oop bootcamp",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Satoru\\PhpLearning\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "satoru-oka",
+            "email": "satoru.oka.1986@gmail.com"
+        }
+    ],
+    "autoload": {
+	    "psr-4": {
+	        "": "src"
+        }
+    },
+    "require": {}
+}

@@ -1,20 +1,11 @@
 <?php
+use App\Student;
+use App\Record;
+use Acme\Test;
 
-spl_autoload_register(function($className) {
-    include 'src/' .$className . '.php';
-});
+require_once __DIR__ . '/vendor/autoload.php';
 
 header('Content-Type:text/plain', true);
 
-$billy = new Dog;
-$santa = new Lion;
-$loko = new Rabbit;
 
-$billy->chase($loko);
-$billy->kill($loko);
-
-$santa->chase($billy);
-$santa->kill($billy);
-
-$loko->chaseBy($santa);
-$loko->killedBy($santa);
+new Student(new Record(), new Test());
