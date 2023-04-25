@@ -5,11 +5,16 @@ spl_autoload_register(function($className) {
 });
 
 header('Content-Type:text/plain', true);
-$pdo = (new PDOClient('mysql', 'localhost', 'store', 'store', 'secret'))->connect();
-$mysqli = (new MySQLiClient('localhost', 'store', 'store', 'secret'))->connect();
 
-$products = $mysqli->select("SELECT * FROM products")->get();
+$billy = new Dog;
+$santa = new Lion;
+$loko = new Rabbit;
 
-foreach ($products as $product) {
-    var_dump($product->name);
-}
+$billy->chase($loko);
+$billy->kill($loko);
+
+$santa->chase($billy);
+$santa->kill($billy);
+
+$loko->chaseBy($santa);
+$loko->killedBy($santa);
